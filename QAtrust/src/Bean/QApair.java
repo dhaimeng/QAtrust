@@ -1,13 +1,35 @@
 package Bean;
 
-import java.util.List;
-import java.util.Map;
+import java.util.ArrayList;
 
 public class QApair {
-	private int ID;			//序号
-	private String Qid;	//问题id
-	private String Question;	//问题内容
-	private String AnswerCount;	//答案个数
-    private List<Map> Answers;	//答案内容序列
-    
+	int ID;			//序号
+	int Qid;	//问题id
+	int AnsNum;
+	ArrayList<Integer> Aid=new ArrayList<Integer>();
+	public int getID() {
+		return ID;
+	}
+	public void setID(int iD) {
+		ID = iD;
+	}
+	public int getQid() {
+		return Qid;
+	}
+	public void setQid(int qid) {
+		Qid = qid;
+	}
+	public ArrayList<Integer> getAid() {
+		return Aid;
+	}
+	public void setAid(ArrayList<Integer> aid) {
+		Aid = aid;
+	}
+	public int getAnsNum() {
+		return AnsNum;
+	}
+	public void setAnsNum(int ansNum) {
+		AnsNum = ansNum;
+	}
+	
 }

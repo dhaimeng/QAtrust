@@ -1,5 +1,7 @@
 package preprocess;
-
+/**
+ * 每个用户给出的答案数量分布
+ */
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
@@ -22,15 +24,15 @@ public class UserCount {
 			String rpath = "D:\\dataset\\OtherBenchMark\\StackOverflow\\" + domain[i] + "\\Users.xml";
 			String postpath = "D:\\dataset\\OtherBenchMark\\StackOverflow\\" + domain[i] + "\\Posts.xml";
 			HashMap<Integer, Integer> UserhasAns=new HashMap<Integer, Integer> (); 
-			UserhasAns=QACount(domain[i],rpath,UserhasAns);
+			UserhasAns=USCount(domain[i],rpath,UserhasAns);
 			UserhasAns=hit(postpath,UserhasAns);
 			File f=new File(wpath);
 			Printhm(f,domain[i],UserhasAns);
 		}
 	}
 
-	public static HashMap<Integer, Integer> QACount(String domain,String rpath,HashMap<Integer, Integer> UserhasAns) {
-		
+	public static HashMap<Integer, Integer> USCount(String domain,String rpath,HashMap<Integer, Integer> UserhasAns) {
+		//获取用户ID，答案数置0
 		try {
 			SAXBuilder builder = new SAXBuilder();
 			Document doc = builder.build(new File(rpath));
@@ -50,7 +52,8 @@ public class UserCount {
 		return UserhasAns;	
 	}
 	public static HashMap<Integer, Integer> hit(String rpath,HashMap<Integer, Integer> hm) {
-        int count = 0;
+        //遍历post的答案，将每个用户回答的答案数量存储hashmap
+		int count = 0;
         try {
 			SAXBuilder builder = new SAXBuilder();
 			Document doc = builder.build(new File(rpath));
@@ -74,6 +77,7 @@ public class UserCount {
         return hm;
     }
 	public static void Printhm(File f,String domain,HashMap<Integer, Integer> map){
+		//按用户id把答案数量1到50间的用户抽出（去噪声点>50的）
 		int sum=0;
 		int userSum=0;
 		Object[] key =  map.keySet().toArray();    
@@ -90,8 +94,7 @@ public class UserCount {
 				}
 		    	sum+=map.get(key[i]);
 		    	userSum++;
-		    }
-			
+		    }			
 		}
 //		System.out.println("共计: "+sum);
 //		System.out.println(domain+"有效用户数： "+userSum);

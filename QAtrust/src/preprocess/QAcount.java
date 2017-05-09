@@ -1,4 +1,7 @@
 package preprocess;
+/**
+ * 统计每个领域中每个问题下的答案数量分布
+ */
 
 import java.io.*;
 import java.util.*;
@@ -43,7 +46,7 @@ public class QAcount {
 				if(PostTypeId==1){		//问题					
 					int AnswerCount=Integer.parseInt(((Element) allChildren.get(i)).getAttributeValue("AnswerCount"));
 					if(AnswerCount>0){
-						String QApair=Id+" "+AnswerCount;
+						String QApair=Id+" "+AnswerCount;	//输出答案数量大于0的问题编号和答案数量
 						QueCount++;
 						FileUtils.write(f, QApair+"\n",true);
 					}
@@ -54,7 +57,7 @@ public class QAcount {
 //					int ParentId=Integer.parseInt(((Element) allChildren.get(i)).getAttributeValue("ParentId"));
 //					System.out.println(AnsCount+"  "+Id+"  "+ParentId);
 				}	
-				else{
+				else{		//未注明的类型
 //					System.out.println(Id+" "+PostTypeId);
 					continue;
 				}
